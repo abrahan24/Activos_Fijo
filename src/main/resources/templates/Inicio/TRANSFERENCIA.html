@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="Layout/layout :: head">
+   
+</head>
+
+<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<div class="wrapper">
+
+  <!-- Preloader -->
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__wobble" src="../../../../dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+  </div>
+
+  <!-- Navbar -->
+  <nav th:replace="Layout/layout :: navar-header">
+    
+  </nav>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <aside th:replace="Layout/layout :: sidebar-izq">
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+     <!-- Content Header (Page header) -->
+     <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Transferencia</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">INICIO</a></li>
+              <li class="breadcrumb-item active">Transferencia</li>
+            </ol>
+          </div>
+        </div>
+        <div th:replace="Layout/layout :: alert"> </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+     <!-- Main content -->
+     <section class="content">
+        <div class="container-fluid">
+        <form action="../../../../SAF-UAP/form_transferencia" method="post">
+          <div class="card card-default">
+            <div class="card-header">
+              <h3 class="card-title">Tranferencia de Activos</h3><br><br>
+              <div class="form-group">
+                <label>Seleccione Persona</label>
+                <input type="hidden" th:field="${transferencia.id_transferencia}">
+                <input type="hidden" name="id_usuario" th:value="${usuario.id_usuario}">
+                    <div class="form-group">
+                    <input type="hidden" th:field="${asignacion.id_asignacion}">
+                    <label for="Nombre">Anterior Persona</label>
+                    <input th:value="${asignacion.persona.nom_persona+' '+asignacion.persona.ap_paterno+' '+asignacion.persona.ap_materno}" autocomplete="off" type="text" class="form-control"  placeholder="Ingrese Nombre" onkeyup="javascript:this.value=this.value.toUpperCase();" disabled>
+                     </div>
+              </div>
+              <div class="form-group">
+                <label>Seleccione Nueva Persona</label>
+                <select class="form-control select2" name="id_persona" style="width: 100%;" required>
+                  <option selected></option>
+                  <th:block th:each="p : ${personas}" th:if="${p.estado_persona != 'X' && p.estado_persona != 'PA'}">
+                    <option th:value="${p.id_persona}" th:text="${p.nom_persona+' '+p.ap_paterno+' '+p.ap_materno}"></option>
+                  </th:block>
+                </select>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>Seleccione Activos</label>
+                    <select class="duallistbox" multiple="multiple" name="id_activo" required>
+                      <th:block th:each="da : ${asignacion.detalleAsignaciones}" th:if="${da.activo.estado_activo != 'X' && da.activo.estado_activo != 'B'}">
+                        <option th:value="${da.activo.id_activo}" th:text="${da.activo.cod_activo+' - '+da.activo.tipoActivo.nom_tipo_activo}"></option>
+                      </th:block>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="card-footer">
+                <div class="d-flex justify-content-between">
+                  <button type="submit" class="btn btn-primary">Realizar Transferencia</button>
+                </div>
+            </div>
+            </div>
+        </form>
+        </div>
+      </section>
+    
+  </div>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+
+  <!-- Main Footer -->
+  <footer th:replace="Layout/layout :: footer" class="main-footer">
+    
+  </footer>
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+
+<script src="../../../../plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="../../../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Select2 -->
+<script src="../../../../plugins/select2/js/select2.full.min.js"></script>
+<!-- Bootstrap4 Duallistbox -->
+<script src="../../../../plugins/bootstrap4-duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<!-- InputMask -->
+<script src="../../../../plugins/moment/moment.min.js"></script>
+<script src="../../../../plugins/inputmask/jquery.inputmask.min.js"></script>
+<!-- date-range-picker -->
+<script src="../../../../plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap color picker -->
+<script src="../../../../plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="../../../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- BS-Stepper -->
+<script src="../../../../plugins/bs-stepper/js/bs-stepper.min.js"></script>
+<!-- dropzonejs -->
+<script src="../../../../plugins/dropzone/min/dropzone.min.js"></script>
+<!-- AdminLTE App -->
+<script src="../../../../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../../../dist/js/demo.js"></script>
+<!-- Page specific script -->
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+
+   
+    //Bootstrap Duallistbox
+    $('.duallistbox').bootstrapDualListbox()
+
+   
+   
+  })
+ 
+
+
+</script>
+
+</body>
+</html>
