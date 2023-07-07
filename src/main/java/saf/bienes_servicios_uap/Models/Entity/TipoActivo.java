@@ -38,11 +38,6 @@ public class TipoActivo implements Serializable{
     @JoinColumn(name = "id_categoriaActivo")
     private CategoriaActivo categoriaActivo;
 
-    //Tabla Marca
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_marca")
-    private Marca marca;
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoActivo", fetch = FetchType.LAZY)
 	private List<Activo> activos;
 }

@@ -37,7 +37,7 @@ public class Persona implements Serializable{
     private String ci;
     @Column(length = 15)
     private String celular;
-    @Column(length = 4)
+    @Column(length = 5)
     private String estado_persona;
     private Integer usuario_reg_per;
     private Integer usuario_mod_per;
