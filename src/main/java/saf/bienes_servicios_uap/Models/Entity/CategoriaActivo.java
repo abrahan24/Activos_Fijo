@@ -1,6 +1,7 @@
 package saf.bienes_servicios_uap.Models.Entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -29,6 +30,10 @@ public class CategoriaActivo implements Serializable{
     private Double vida_util;
     @Column(length = 2)
     private String estado_categoria;
+    private Integer usuario_reg_cat;
+    private Integer usuario_mod_cat;
+    private Date fecha_reg_cat;
+    private Date fecha_mod_cat;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoriaActivo", fetch = FetchType.LAZY)
 	private List<TipoActivo> tipoActivos;
