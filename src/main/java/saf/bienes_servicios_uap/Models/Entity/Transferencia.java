@@ -31,18 +31,13 @@ public class Transferencia implements Serializable{
     private Date fecha_reg_t;
     private Date fecha_mod_t;
 
-    //Tabla Asignacion
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_asignacion")
-    private Asignacion asignacion;
-    //Tabla Persona
+    //Tabla Persona ---- Persona Con Activos Asignados
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_persona")
     private Persona persona;
-    //Tabla Usuario
+    //Tabla Persona ---- Persona Nueva 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_usuario")
-    private Usuario usuario;
-
+    @JoinColumn(name = "per_id_persona")
+    private Persona per_id_persona;
 
 }

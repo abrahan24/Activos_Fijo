@@ -83,7 +83,6 @@ public class AsignacionController {
             asignacion.setPersona(personaService.findOne(id_persona));
             Persona persona = personaService.findOne(id_persona);
             persona.setEstado_persona("PA");    //PA = Persona Asignada
-            asignacion.setUsuario(usuarioService.findOne(id_usuario));
             asignacionService.save(asignacion);
 
             if (id_activo != null) {

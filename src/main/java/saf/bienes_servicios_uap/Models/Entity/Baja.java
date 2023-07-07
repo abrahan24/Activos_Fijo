@@ -11,8 +11,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -41,10 +39,6 @@ public class Baja implements Serializable{
     private Date fecha_reg_b;
     private Date fecha_mod_b;
     
-    //Tabla Usuario;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_usuario")
-    private Usuario usuario;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "baja", fetch = FetchType.LAZY)
 	private List<DetalleBaja> detalleBajas;

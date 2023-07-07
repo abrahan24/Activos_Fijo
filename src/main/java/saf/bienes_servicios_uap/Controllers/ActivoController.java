@@ -19,6 +19,7 @@ public class ActivoController {
     @Autowired
     private IActivoService activoService;
 
+    
 /* 
 
      @GetMapping("/add_persona")

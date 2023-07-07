@@ -60,6 +60,13 @@ public class Persona implements Serializable{
     @JoinColumn(name = "id_oficina")
     private Oficina oficina;
 
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona", fetch = FetchType.LAZY)
-	private List<Usuario> usuarios;
+	private List<Transferencia> transferencias;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "per_id_persona", fetch = FetchType.LAZY)
+	private List<Transferencia> transferencias_per_i_persona;
+
+    
+
 }

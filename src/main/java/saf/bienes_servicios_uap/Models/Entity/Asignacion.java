@@ -12,8 +12,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,18 +31,13 @@ public class Asignacion implements Serializable{
     @Column(length = 2)
     private String estado_asignacion;
     private Integer usuario_mod_a;
+    private Integer usuario_reg_a;
     private Date fecha_reg_a;
     private Date fecha_mod_a;
     
     //Tabla Persona;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_persona")
+    @OneToOne
     private Persona persona;
-
-    //Tabla Usuario;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_usuario")
-    private Usuario usuario;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "asignacion", fetch = FetchType.LAZY)
 	private List<DetalleAsignacion> detalleAsignaciones;

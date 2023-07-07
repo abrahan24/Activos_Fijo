@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,8 +38,7 @@ public class Usuario implements Serializable{
     private Date fecha_mod;
 
     //Tabla Persona
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_persona")
+    @OneToOne
     private Persona persona;
 
     //Tabla Rol

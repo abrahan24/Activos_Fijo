@@ -109,7 +109,6 @@ public class TransferenciaController {
             transferencia.setEstado_transferencia("A");
             transferencia.setFecha_transferencia(new Date());
             transferencia.setFecha_reg_t(new Date());
-            transferencia.setAsignacion(asignacionService.findOne(id_asignacion));
             transferencia.setPersona(personaService.findOne(id_persona));
             Asignacion  asignacion = asignacionService.findOne(id_asignacion);
             Persona persona = personaService.findOne(asignacion.getPersona().getId_persona());
@@ -120,7 +119,6 @@ public class TransferenciaController {
             Persona persona2 = personaService.findOne(id_persona);
             persona2.setEstado_persona("PA");
             personaService.save(persona2);
-            transferencia.setUsuario(usuarioService.findOne(id_usuario));
             transferenciaService.save(transferencia);
 
             if (id_activo != null) {

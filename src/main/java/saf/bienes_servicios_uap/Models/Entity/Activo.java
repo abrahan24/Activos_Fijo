@@ -33,7 +33,7 @@ public class Activo implements Serializable{
     private String descripcion_activo;
     private Date fecha_adquisicion;
     private Double vida_util_activo;
-    @Column(length = 2)
+    @Column(length = 5)
     private String estado_activo;
     @Column(length = 50)
     private String serie_activo;
