@@ -71,7 +71,7 @@ public class UsuarioController {
 
         if (request.getSession().getAttribute("usuario") != null) {
            
-            jdbcTemplate.execute("CALL CrearUsuario(?, ?, ?, ?)", 
+            jdbcTemplate.execute("CALL Registrar_Usuario(?, ?, ?, ?)", 
             (PreparedStatementCallback<Usuario>) ps -> {
                 ps.setString(1, u.getNom_usuario());    
                 ps.setString(2, u.getContrasena());

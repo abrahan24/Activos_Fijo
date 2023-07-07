@@ -84,9 +84,9 @@ public class PersonaController {
             Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
             usuario = usuarioService.findOne(usuario.getId_usuario());
 
-            Long id_usuario =usuario.getId_usuario();
+            Integer id_usuario =usuario.getId_usuario().intValue();
            
-            jdbcTemplate.execute("CALL Crea_Persona(?, ?, ?, ?, ?, ?, ?, ?, ?)", 
+            jdbcTemplate.execute("CALL Registrar_Persona(?, ?, ?, ?, ?, ?, ?, ?, ?)", 
             (PreparedStatementCallback<Persona>) ps -> {
                 ps.setString(1, persona.getNom_persona());    
                 ps.setString(2, persona.getAp_paterno());
@@ -96,7 +96,7 @@ public class PersonaController {
                 ps.setLong(6, id_cargo);
                 ps.setLong(7, id_oficina);
                 ps.setLong(8, id_tipoPersonal);
-                ps.setLong(9, id_usuario);
+                ps.setInt(9, id_usuario);
                 ps.execute();
                 return null;
             });
