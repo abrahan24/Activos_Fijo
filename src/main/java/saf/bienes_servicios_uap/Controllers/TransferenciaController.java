@@ -106,19 +106,24 @@ public class TransferenciaController {
     Model model,RedirectAttributes flash, HttpServletRequest request){
          if (request.getSession().getAttribute("usuario") != null) {
 
+            Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+
             transferencia.setEstado_transferencia("A");
             transferencia.setFecha_transferencia(new Date());
             transferencia.setFecha_reg_t(new Date());
-            transferencia.setPersona(personaService.findOne(id_persona));
+            transferencia.setUsuario_reg_t(usuario.getId_usuario().intValue());
             Asignacion  asignacion = asignacionService.findOne(id_asignacion);
             Persona persona = personaService.findOne(asignacion.getPersona().getId_persona());
             persona.setEstado_persona("A");
             personaService.save(persona);
-            asignacion.setPersona(personaService.findOne(id_persona));
-            asignacionService.save(asignacion);
+            transferencia.setPersona(personaService.findOne(persona.getId_persona()));
             Persona persona2 = personaService.findOne(id_persona);
-            persona2.setEstado_persona("PA");
+            persona2.setEstado_persona("AT");
             personaService.save(persona2);
+            asignacion.setPersona(persona2);
+            asignacion.setFecha_mod_a(new Date());
+            asignacionService.save(asignacion);
+            transferencia.setPer_id_persona(personaService.findOne(persona2.getId_persona()));
             transferenciaService.save(transferencia);
 
             if (id_activo != null) {
@@ -134,6 +139,7 @@ public class TransferenciaController {
 
                     Activo activo = activoService.findOne(id_activo[i]);
                     activo.setEstado_activo("AT");
+                    activo.setFecha_mod_ac(new Date());
                     activoService.save(activo);
                 }
             }

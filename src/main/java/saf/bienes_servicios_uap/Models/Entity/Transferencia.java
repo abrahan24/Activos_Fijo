@@ -28,6 +28,7 @@ public class Transferencia implements Serializable{
     @Column(length = 2)
     private String estado_transferencia;
     private Integer usuario_mod_t;
+    private Integer usuario_reg_t;
     private Date fecha_reg_t;
     private Date fecha_mod_t;
 

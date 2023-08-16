@@ -7,8 +7,7 @@
 <div class="wrapper">
 
   <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__wobble" src="../../../../dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+  <div th:replace="Layout/layout :: Preloader" >
   </div>
 
   <!-- Navbar -->
@@ -55,29 +54,50 @@
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="../../../../TDJ-Registro/form_activo" method="post" autocomplete="off">
+              <form action="../../../../SAF-UAP/form_activo" method="post" autocomplete="off">
                 <div class="card-body">
                   <div class="form-group">
-                    <label>Seleccione Tipo De Activo</label>
-                    <select class="form-control select2" name="id_tipoActivo" style="width: 100%;" required>
+                    <label>Seleccione Categoria Activo</label>
+                    <select class="form-control select2" name="id_categoriaActivo" style="width: 100%;" required>
                       <option selected></option>
-                      <th:block th:each="ta : ${tipoActivos}" th:if="${ta.estado_tipoactivo != 'X'}">
-                        <option th:value="${ta.id_tipoactivo}" th:text="${ta.nom_tipoActivo}">Alaska</option>
+                      <th:block th:each="ca : ${categoriasActivos}" th:if="${ca.estado_categoria != 'X'}">
+                        <option th:value="${ca.id_categoriaActivo}" th:text="${ca.nom_categoria}"></option>
                       </th:block>
                     </select>
                   </div>
                   <div class="form-group">
-                    <input type="hidden" th:field="${new_activo.id_activo}">
+                    <label>Seleccione Tipo De Activo</label>
+                    <select class="form-control select2" name="id_tipoActivo" style="width: 100%;" required>
+                      <option selected></option>
+                      <th:block th:each="ta : ${tiposActivos}" th:if="${ta.estado_tipo_activo != 'X'}">
+                        <option th:value="${ta.id_tipoActivo}" th:text="${ta.nom_tipo_activo}"></option>
+                      </th:block>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <input type="hidden" th:field="${activo.id_activo}">
                     <label for="exampleInputEmail1">Modelo</label>
-                    <input th:field="${new_activo.nom_activo}" type="text" class="form-control"  placeholder="Nombre Activo" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                    <input th:field="${activo.cod_activo}" type="text" class="form-control"  placeholder="Codigo Activo" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Descripción Activo</label>
-                    <input th:field="${new_activo.descripcion_activo}" type="text" class="form-control"  placeholder="Descripción Activo" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                    <input th:field="${activo.descripcion_activo}" type="text" class="form-control"  placeholder="Descripción Activo" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
                   </div>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Codigo Activo</label>
-                    <input th:field="${new_activo.codigo_activo}" type="text" class="form-control"  placeholder="Codigo Activo" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                    <label for="exampleInputEmail1">Vida Util</label>
+                    <input th:field="${activo.vida_util_activo}" type="number" class="form-control"  placeholder="Vida Util" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Numero De Serie</label>
+                    <input th:field="${activo.serie_activo}" type="text" class="form-control"  placeholder="Numero de Serie" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Marca / Material</label>
+                    <input th:field="${activo.marca_activo}" type="text" class="form-control"  placeholder="Marca / Material" onkeyup="javascript:this.value=this.value.toUpperCase();" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Precio Compra</label>
+                    <input th:field="${activo.precio_compra}" type="number" class="form-control"  placeholder="Precio Compra" required>
                   </div>
                   
                 </div>
@@ -86,112 +106,15 @@
                 <div class="card-footer">
                   <div class="d-flex justify-content-between">
                     <button type="submit" class="btn btn-primary">Agregar Activo</button>
-                    <a type="submit" class="btn btn-success" th:href="${'../../../../TDJ-Informe/Informe'}">Realizar Informe</a>
                   </div>
                 </div>
               </form>
             </div>
           </div>
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Lista Activos</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                    <th>Tipo Activo</th>
-                    <th>Descripción Activo</th>
-                    <th>Codigo Activo</th>
-                    <th>Acción</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                    <th:block th:each="a : ${activos}" th:if="${a.estado_activo != 'X'}">
-                  <tr>
-                    
-                      <td th:text="${a.tipoactivo.nom_tipoActivo}"></td>
-                      <td th:text="${a.descripcion_activo}"></td>
-                      <td th:text="${a.codigo_activo}"></td>
-                     
-                      <td class="text-center">
-                        <a type="button" data-toggle="modal" th:data-target="${'#modal-secondary'+a.id_activo}" title="Editar" >
-                          <i class="nav-icon fa fa-edit" ></i>
-                        </a>&nbsp;
-                        <a type="button" title="Eliminar" th:href="${'../../../../TDJ-Registro/eliminar_activo/'+a.id_activo}">
-                          <i class="nav-icon fa fa-times"></i>
-                        </a>
-                        
-                    </td>
-                      
-                  </tr>
-                  </th:block>
-                  <tfoot>
-                  <tr>
-                    <th>Tipo Activo</th>
-                    <th>Descripción Activo</th>
-                    <th>Codigo Activo</th>
-                    <th>Acción</th>
-                  </tr>
-                  </tfoot>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-          </div>
+       
         </div>
       </div>
-      <th:block th:each="a : ${activos}">
-        <div class="modal fade" th:id="${'modal-secondary'+a.id_activo}">
-          <div class="modal-dialog">
-            <div class="modal-content bg-secondary">
-              <div class="modal-header">
-                <h4 class="modal-title">Editar Activo</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <form action="../../../../TDJ-Registro/editar_activo" method="post">
-                <div class="modal-body">
-                  <div class="form-group">
-                    <input type="hidden" th:value="${a.id_activo}" name="id_activo">
-                    <label for="exampleInputEmail1">Nombre Activo</label>
-                    <input th:value="${a.nom_activo}" type="text" class="form-control" name="nom_activo"  placeholder="Nombre " onkeyup="javascript:this.value=this.value.toUpperCase();" required>
-                  </div>
-                  <div class="form-group">
-                    <input type="hidden" th:value="${a.id_activo}" name="id_activo">
-                    <label for="exampleInputEmail1">Descripción Activo</label>
-                    <input th:value="${a.descripcion_activo}" type="text" class="form-control" name="descripcion_activo"  placeholder="Nombre " onkeyup="javascript:this.value=this.value.toUpperCase();" required>
-                  </div>
-                  <div class="form-group">
-                    <input type="hidden" th:value="${a.id_activo}" name="id_activo">
-                    <label for="exampleInputEmail1">Codigo Activo</label>
-                    <input th:value="${a.codigo_activo}" type="text" class="form-control" name="codigo_activo"  placeholder="Nombre " onkeyup="javascript:this.value=this.value.toUpperCase();" required>
-                  </div>
-                  <div class="form-group">
-                    <label>Cargo</label>
-                    <select class="form-control select2" name="id_tipoActivo" style="width: 100%;" required>
-                      <option selected></option>
-                      <th:block th:each="ta : ${tipoActivos}" th:if="${ta.estado_tipoactivo != 'X'}">
-                        <option th:if="${a.id_activo != null && ta.id_tipoactivo == a.tipoactivo.id_tipoactivo}" th:value="${ta.id_tipoactivo}" th:text="${ta.nom_tipoActivo}" selected>Alaska</option>
-                        <option th:if="${a.id_activo != null && ta.id_tipoactivo != a.tipoactivo.id_tipoactivo}" th:value="${ta.id_tipoactivo}" th:text="${ta.nom_tipoActivo}" >Alaska</option>
-                      </th:block>
-                    </select>
-                  </div>
-                </div>
-                <div class="modal-footer justify-content-between">
-                  <button type="button" class="btn btn-outline-light" data-dismiss="modal">Cerrar</button>
-                  <button type="submit" class="btn btn-outline-light">Guardar</button>
-                </div>
-            </form>
-            </div>
-            <!-- /.modal-content -->
-          </div>
-          <!-- /.modal-dialog -->
-        </div>
-      </th:block>        
+         
     </section>
     
     <!-- /.content -->

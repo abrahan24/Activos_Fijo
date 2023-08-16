@@ -55,7 +55,7 @@
                 <input type="hidden" name="id_usuario" th:value="${usuario.id_usuario}">
                 <select class="form-control select2" name="id_persona"  style="width: 100%;" required>
                   <option selected></option>
-                  <th:block th:each="p : ${personas}" th:if="${p.estado_persona != 'X' && p.estado_persona != 'PA'}">
+                  <th:block th:each="p : ${personas}" th:if="${p.estado_persona != 'X' && p.estado_persona != 'PA'&& p.estado_persona != 'AT'}">
                     <option th:value="${p.id_persona}" th:text="${p.nom_persona+' '+p.ap_paterno+' '+p.ap_materno}">Alaska</option>
                   </th:block>
                 </select>

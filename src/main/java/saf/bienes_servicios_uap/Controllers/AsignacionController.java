@@ -77,9 +77,12 @@ public class AsignacionController {
     Model model,RedirectAttributes flash, HttpServletRequest request){
          if (request.getSession().getAttribute("usuario") != null) {
 
+            Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+
             asignacion.setEstado_asignacion("A");
             asignacion.setFecha_asignacion(new Date());
             asignacion.setFecha_reg_a(new Date());
+            asignacion.setUsuario_reg_a(usuario.getId_usuario().intValue());
             asignacion.setPersona(personaService.findOne(id_persona));
             Persona persona = personaService.findOne(id_persona);
             persona.setEstado_persona("PA");    //PA = Persona Asignada
@@ -98,6 +101,7 @@ public class AsignacionController {
 
                 Activo activo = activoService.findOne(id_activo[i]);
                 activo.setEstado_activo("AA"); // AA = Activo Asignado a Una Persona
+                activo.setFecha_mod_ac(new Date());
                 activoService.save(activo);
             }
             }
