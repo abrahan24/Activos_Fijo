@@ -27,7 +27,6 @@ public class PersonaController {
 
     private final JdbcTemplate jdbcTemplate;
     
-    @Autowired
     public PersonaController(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }

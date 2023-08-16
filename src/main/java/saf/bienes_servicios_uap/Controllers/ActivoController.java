@@ -28,7 +28,6 @@ public class ActivoController {
 
     private final JdbcTemplate jdbcTemplate;
     
-    @Autowired
     public ActivoController(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }

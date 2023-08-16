@@ -25,7 +25,6 @@ public class UsuarioController {
 
     private final JdbcTemplate jdbcTemplate;
     
-    @Autowired
     public UsuarioController(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
