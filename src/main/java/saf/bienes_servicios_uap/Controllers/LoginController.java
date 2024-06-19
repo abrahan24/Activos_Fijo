@@ -34,8 +34,8 @@ public class LoginController {
     public String login_Form(Model model,@RequestParam String nom_usuario,
         @RequestParam String contrasena,RedirectAttributes flash, HttpServletRequest request){
             
-            String contra_desencriptada = desencriptarContraseña(contrasena);
-        Usuario usuario = usuarioService.getUsuario(nom_usuario, contra_desencriptada);
+            // String contra_desencriptada = desencriptarContraseña(contrasena);
+        Usuario usuario = usuarioService.getUsuario(nom_usuario, contrasena);
 
         model.addAttribute("usuario", usuario);
         if (usuario != null) {
